@@ -287,29 +287,22 @@ var saveTasks = function() {
 var loadTasks = function() {
     // get task items from localStorage
     tasks = localStorage.getItem("tasks");
-
     if (tasks === null) {
         tasks = [];
         return false;
     }
-
     // Convert tasks from stringified format back to array of objects
     tasks = JSON.parse(tasks);
-
-
     // iterate through tasks array and create task elements on the page
 
     for (var i = 0; i < tasks.length; i++) {
         tasks[i].id = taskIdCounter;
-        
         //create list item
         var listItemEl = document.createElement("li");
         listItemEl.className = "task-item";
-
         // add task id as a cutom attribute
         listItemEl.setAttribute("data-task-id", tasks[i].id);
         listItemEl.setAttribute("draggable", "true");
-
         // create div to hold task info and add to list item
         var taskInfoEl = document.createElement("div");
         //give it a class name
@@ -318,7 +311,6 @@ var loadTasks = function() {
         taskInfoEl.innerHTML = "<h3 class='task-name'>" + tasks[i].name + "</h3><span class='task-type'>" + tasks[i].type + "</span>";
 
         listItemEl.appendChild(taskInfoEl);
-
         var taskActionsEl = createTaskActions(tasks[i].id);
         listItemEl.appendChild(taskActionsEl);
 
@@ -334,7 +326,6 @@ var loadTasks = function() {
             listItemEl.querySelector("select[name='status-change']").selectedIndex = 2;
             tasksCompletedEl.appendChild(listItemEl);
         }
-
         taskIdCounter++;
     };
 
